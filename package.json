@@ -1,0 +1,19 @@
+{
+  "name": "ada_hack-corp_solutions_be3",
+  "version": "1.0.0",
+  "description": "Repositório visa desenvolver uma aplicação que atenda aos requesitos do primeiro Hackathon da Ada Tech",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "jest": "^29.7.0",
+    "sequelize": "^6.37.2",
+    "sequelize-cli": "^6.6.2"
+  }
+}
