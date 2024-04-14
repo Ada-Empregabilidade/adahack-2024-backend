@@ -1,5 +1,5 @@
 const db = require('../../infra/db/sequelize/database.js');
-const User = db.user;
+const User = require('../../infra/db/sequelize/models/User.js');
 
 class admin {
     static create = async (req, res) => {
