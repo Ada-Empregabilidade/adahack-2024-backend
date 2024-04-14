@@ -4,7 +4,7 @@ const User = require('../../infra/db/sequelize/models/User.js');
 class admin {
     static create = async (req, res) => {
         const { email } = req.body;
-        const data = { email };
+        const data = { email, userType: 'manager' };
 
         // Email unique validation
         const emailValidation = await User.findOne({ where: { email: email } });
@@ -15,7 +15,7 @@ class admin {
         }
 
         await User.create(data, {
-            fields: ['email'],
+            fields: ['email', 'userType'],
         })
             .then(data => {
                 res.status(201).json({ message: 'User created!', id: data.id });
