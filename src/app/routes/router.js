@@ -1,8 +1,8 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
 
 router.get('/healthcheck', (req, res) => {
     res.json({ message: 'Health check: server online!' });
 });
 
-module.exports = router;
+export default router;
