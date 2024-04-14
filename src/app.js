@@ -1,12 +1,19 @@
-const express = require('express');
+const express = require("express");
+const cors = require("cors");
+const db = require('./infra/db/sequelize/models'); 
+const router = require('./app/routes/router')
 const app = express();
-const router = require('./app/routes/router');
 
+app.use(cors({ origin: "http://localhost:8081" }));
 app.use(express.json());
-app.use(router);
+app.use(express.urlencoded({ extended: true }));
+app.use(router)
 
-const PORT = process.env.PORT || 5000;
+db.sequelize.sync()
+  .then(() => console.log("Connection has been established successfully."))
+  .catch(err => console.error("Unable to connect to the database:", err.message));
 
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-    console.log(`Server on-line. Port: ${PORT}`);
+    console.log(`Server on-line. Port: ${PORT}.`);
 });
