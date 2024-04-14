@@ -6,6 +6,7 @@ class EmployeeRepository {
             {
                 education_level: data.education_level,
                 gender: data.gender,
+                nationality: data.nationality,
                 color: data.color,
                 sexual_orientation: data.sexual_orientation,
                 pcd: data.pcd,
