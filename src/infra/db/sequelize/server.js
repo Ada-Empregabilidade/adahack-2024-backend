@@ -8,16 +8,11 @@ app.use(cors({ origin: "http://localhost:8081" }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get("/", (req, res) => {
-    res.json({ message: "Testar rota" });
-});
-
 db.sequelize.sync()
-  .then(() => console.log("Banco foi sincronizado"))
-  .catch(err => console.error("Erro ao sincronizar o Banco:", err.message));
+  .then(() => console.log("Connection has been established successfully."))
+  .catch(err => console.error("Unable to connect to the database:", err.message));
 
-
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-    console.log(`O servidor está rodando na porta ${PORT}.`);
+    console.log(`Server on-line. Port: ${PORT}.`);
 });
