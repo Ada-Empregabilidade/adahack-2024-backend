@@ -1,7 +1,7 @@
-const express = require('express');
-const cors = require('cors');
-const db = require('./infra/db/sequelize/models');
-const router = require('./app/routes/router');
+import express from 'express';
+import cors from 'cors';
+import db from './infra/db/sequelize/models/index.js';
+import router from './app/routes/router.js';
 
 const app = express();
 

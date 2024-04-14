@@ -1,4 +1,4 @@
-module.exports = {
+export default {
     HOST: "localhost",
     USER: "postgres",
     PASSWORD: "admin",

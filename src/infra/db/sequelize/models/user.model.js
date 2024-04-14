@@ -1,6 +1,5 @@
-module.exports = (sequelize, DataTypes) => {
-
-const User = sequelize.define('User', {
+const UserModel = (sequelize, DataTypes) => {
+  const User = sequelize.define('User', {
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
@@ -40,6 +39,8 @@ const User = sequelize.define('User', {
     pcd: DataTypes.BOOLEAN,
     user_type: DataTypes.STRING
   });
-  
+
   return User;
-}
+};
+
+export default UserModel;
