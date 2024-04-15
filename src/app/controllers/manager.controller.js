@@ -1,27 +1,27 @@
-// import User from '../../infra/db/sequelize/models/index.js';
-import User from '../../infra/db/sequelize/models/user.model.js';
+import models from '../../infra/db/sequelize/models/index.js';
+// import { User } from '../../infra/db/sequelize/models/index.js';
 
 
-class gestor {
-    static async listAllEmployees(req, res) {
+class ManagerController {
+    async listAllEmployees(req, res) {
         try {
-            const employees = await User.findAll();
+            const employees = await models.User.findAll();
             return res.status(200).json(employees);
         } catch (error) {
-            return res.status(500).json(error.message);
+            return res.status(400).json({ error: error.message });
         }
     }
 
-    static async crateEmployee(req, res) {
+    async crateEmployee(req, res) {
         const newEmployee = req.body;
         try {
-          const createdEmployee = await User.create(newEmployee);
+          const createdEmployee = await models.User.create(newEmployee);
           return res.status(201).json(createdEmployee);
         } catch (error) {
-            return res.status(500).json(error.message);
+            return res.status(400).json({ error: error.message });
       }
   }
 
        
   }
-export default gestor;
+export default ManagerController;
