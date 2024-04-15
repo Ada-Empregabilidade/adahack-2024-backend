@@ -12,7 +12,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(router);
 
 //testar a rota: localhost:3000/api/manager/employee/1
-app.use('/api/manager/employee', router);
+// app.use('/api/manager/employee', router);
 
 // MOVIDO PARA O ARQUIVO DE CONFIG DO SEQUELIZE: /model/index.js
 // db.sequelize
