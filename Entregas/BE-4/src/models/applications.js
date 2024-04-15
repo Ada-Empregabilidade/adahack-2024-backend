@@ -26,7 +26,6 @@ const Application = sequelize.define('Application',{
             key: 'id'
             }
     },
-
     
 },{tableName : 'applications_job_candidate'});
 

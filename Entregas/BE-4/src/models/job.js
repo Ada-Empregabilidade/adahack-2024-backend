@@ -39,8 +39,6 @@ const Job = sequelize.define('Job',{
         type : DataType.BOOLEAN,
         allowNull : false
     }
-
-
 });
 
-module.exports = Human_Resource;
+module.exports = Job;
