@@ -3,8 +3,9 @@
     "version": "1.0.0",
     "description": "Repositório visa desenvolver uma aplicação que atenda aos requesitos do primeiro Hackathon da Ada Tech",
     "main": "index.js",
+    "type": "module",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
+        "test": "jest --verbose",
         "start": "node --watch src/app.js"
     },
     "keywords": [],

@@ -1,5 +1,5 @@
-const dbConfig = require("../db.config.js");
-const { Sequelize, DataTypes } = require("sequelize");
+import dbConfig from "../db.config.js";
+import { DataTypes, Sequelize } from "sequelize";
 
 const sequelize = new Sequelize(
   dbConfig.DB,
@@ -11,10 +11,10 @@ const sequelize = new Sequelize(
   }
 );
 
-const User = require('./user.model.js')(sequelize, DataTypes);
+import UserModel from './user.model.js'
+const User = UserModel(sequelize, DataTypes);
 
-module.exports = {
+export default {
   sequelize,
   User
 };
-
