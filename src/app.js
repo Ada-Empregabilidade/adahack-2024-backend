@@ -8,7 +8,10 @@ const app = express();
 app.use(cors({ origin: 'http://localhost:8081' }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(router);
+// app.use(router);
+
+//testar a rota: localhost:3000/api/manager/employee/1
+app.use("/api/manager/employee", router);
 
 db.sequelize
     .sync()
