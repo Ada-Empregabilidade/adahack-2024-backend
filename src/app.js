@@ -1,15 +1,15 @@
-import express from 'express';
-import cors from 'cors';
+import express from "express";
+import cors from "cors";
 //import db from './infra/db/sequelize/models/index.js';
-import router from './app/routes/router.js';
+import router from "./app/routes/router.js";
 
 const app = express();
 
-app.use(cors({ origin: 'http://localhost:8081' }));
+app.use(cors({ origin: "http://localhost:8081" }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // NÃO COMENTAR A LINHA ABAIXO
-app.use(router);
+app.use("/api", router);
 
 //testar a rota: localhost:3000/api/manager/employee/1
 // app.use('/api/manager/employee', router);
@@ -24,5 +24,5 @@ app.use(router);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-    console.log(`Server on-line. Port: ${PORT}.`);
+  console.log(`Server on-line. Port: ${PORT}.`);
 });

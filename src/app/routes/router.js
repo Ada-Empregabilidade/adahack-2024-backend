@@ -10,24 +10,24 @@ router.get("/healthcheck", (req, res) => {
 });
 
 // Admin route > create manager
-router.post("/api/admin/manager", Admin.create);
+router.post("/admin/manager", Admin.create);
 
 // Manager routes
 // const managerController = new ManagerController();
 
 //rota do gestor para criar funcionário
-router.post("/api/manager/employee", ManagerController.crateEmployee);
+router.post("/manager/employee", ManagerController.crateEmployee);
 
 // rota do gestor para listar todos os funcionários
-router.get("/api/manager/employee", ManagerController.listAllEmployees);
+router.get("/manager/employee", ManagerController.listAllEmployees);
 
 // rota do gestor para deletar funcionário
-router.delete("/api/manager/employee/:id", ManagerController.deleteEmployee);
+router.delete("/manager/employee/:id", ManagerController.deleteEmployee);
 
 //listar usuário por id
-router.get("/api/manager/employee/:id", ManagerController.findUserById);
+router.get("/manager/employee/:id", ManagerController.findUserById);
 
 //rota do gestor para atualizar funcionário
-router.put("/api/manager/employee/:id", ManagerController.updateEmployee);
+router.put("/manager/employee/:id", ManagerController.updateEmployee);
 
 export default router;
