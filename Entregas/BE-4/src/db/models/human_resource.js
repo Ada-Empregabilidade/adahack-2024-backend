@@ -1,6 +1,4 @@
-const {User} = require('../db.sync');
-
-module.exports = (sequelize,DataTypes,User) => {
+module.exports = (sequelize,DataTypes,Employee) => {
 
     const HumanResource = sequelize.define('HumanResource',{
         id : {
@@ -11,10 +9,10 @@ module.exports = (sequelize,DataTypes,User) => {
             allowNull : false
         },
     
-        user_id : {
+        employee_id : {
             type : DataTypes.INTEGER,
             references : {
-                model : User,
+                model : Employee,
                 key: 'id'
                 }
         },

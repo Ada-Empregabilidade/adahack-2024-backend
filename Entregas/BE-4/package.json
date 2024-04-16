@@ -1,5 +1,6 @@
 {
   "devDependencies": {
+    "dotenv": "^16.4.5",
     "mysql2": "^3.9.4",
     "sequelize": "^6.37.3"
   }

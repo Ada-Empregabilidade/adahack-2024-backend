@@ -1,8 +1,10 @@
-//esses valores devem ser recuperados do env
+const path = require('path');
+
+require('dotenv').config({path: path.resolve(__dirname,'../../.env')});
 
 module.exports = {
-    HOST: "localhost",
-    USER: "root",
-    PASSWORD: "passwordDB@2024",
-    DB: "adahack-diversity-db"
+    HOST: process.env.DB_HOST,
+    USER: process.env.DB_USER,
+    PASSWORD: process.env.DB_PASSWORD,
+    DB: process.env.DB_NAME
 };

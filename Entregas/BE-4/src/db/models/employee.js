@@ -1,5 +1,5 @@
 module.exports = (sequelize,DataTypes,User) => {
-    const Candidate = sequelize.define('Candidate',{
+    const Employee = sequelize.define('Employee',{
         id : {
             type : DataTypes.INTEGER,
             primaryKey : true,
@@ -7,7 +7,7 @@ module.exports = (sequelize,DataTypes,User) => {
             autoIncrement : true,
             allowNull : false
         },
-        
+
         user_id : {
             type : DataTypes.INTEGER,
             references : {
@@ -16,15 +16,19 @@ module.exports = (sequelize,DataTypes,User) => {
             }
         },
     
-        objective : {
+        position : {
             type: DataTypes.STRING
         },
     
-        summary : {
+        department : {
             type: DataTypes.STRING
         },
     
-    },{tableName : 'candidates',timestamps : false});
+        employee_registration : {
+            type : DataTypes.DATE
+        }, 
     
-    return Candidate;
+    },{tableName : 'employees',timestamps : false});
+    
+    return Employee;
 }

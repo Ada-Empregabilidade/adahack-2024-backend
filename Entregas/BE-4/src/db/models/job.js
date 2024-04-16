@@ -1,5 +1,3 @@
-const {Human_Resource} = require('../db.sync');
-
 module.exports = (sequelize,DataTypes,HumanResource) => {
     const Job = sequelize.define('Job',{
         id : {

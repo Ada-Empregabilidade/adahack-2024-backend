@@ -30,10 +30,22 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
 
-      user_type: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
+      gender : {
+        type: DataTypes.STRING
+    },
+
+    sexual_orientation : {
+        type: DataTypes.STRING
+    },
+
+    ethnicity : {
+        type: DataTypes.STRING
+    },
+
+    pwd : {
+        type: DataTypes.BOOLEAN
+    }
+
     },
     { tableName: "users", timestamps: false }
   );

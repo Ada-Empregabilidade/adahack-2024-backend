@@ -1,5 +1,3 @@
-const {Candidate,Job} = require('../db.sync');
-
 module.exports = (sequelize,DataTypes,Job,Candidate) => {
     const Application = sequelize.define('Application',{
         id : {
