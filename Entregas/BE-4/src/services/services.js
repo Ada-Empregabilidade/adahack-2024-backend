@@ -1,50 +1,49 @@
-const database = require('../../src/db/db.sync') //nome do database apenas de exemplo. Será alterado quando for criado o definitivo
+const { Employee } = require('../../src/db/models'); // Colocar a rota correta quando for definida!
 
-
-async function getAllEmployees(db) {
+async function getAllEmployees() {
     try {
-        const [employees] = await db.query('SELECT * FROM employees');
+        const employees = await Employee.findAll();
         return employees;
     } catch (error) {
         throw new Error("Erro ao obter funcionários do banco de dados: " + error.message);
     }
 }
 
-async function getEmployeeById(db, employeeId) {
+async function getEmployeeById(employeeId) {
     try {
-        const [employee] = await db.query('SELECT * FROM employees WHERE id = ?', [employeeId]);
-        return employee[0] || null; // Retorna o funcionário encontrado ou null se nenhum for encontrado
+        const employee = await Employee.findByPk(employeeId);
+        return employee || null;
     } catch (error) {
         throw new Error("Erro ao obter funcionário por ID do banco de dados: " + error.message);
     }
 }
 
-
-
-async function registerEmployee(db, employee) {
+async function registerEmployee(employeeData) {
     try {
-        const employeeData = await db.execute('INSERT INTO employees (name, email, department, employee_registration, gender, sexual_orientation, ethnicity, pwd) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-        [employee.name, employee.position, employee.department, employee.employee_registration, employee.gender, employee.sexual_orientation, employee.ethnicity, employee.pwd])
-        return employeeData.insertId;       
+        const employee = await Employee.create(employeeData);
+        return employee.id;       
     } catch (error) {
-        throw new Error("Erro ao cadastrar o usuário" + error.message)
+        throw new Error("Erro ao cadastrar o funcionário: " + error.message);
     }
 }
 
-async function updateEmployee(db, employeeId, employee) {
+async function updateEmployee(employeeId, employeeData) {
     try {
-        const employeeData = await db.execute('UPDATE employees SET name = ?, email = ?, department = ?, employee_registration = ?, gender = ?, sexual_orientation = ?, ethnicity = ?, pwd = ? WHERE id = ?',
-            [employee.name, employee.email, employee.department, employee.employee_registration, employee.gender, employee.sexual_orientation, employee.ethnicity, employee.pwd, employeeId]);
-        return employeeData[0].affectedRows; // Assuming your execute function returns information about the affected rows
+        const affectedRows = await Employee.update(employeeData, {
+            where: { id: employeeId }
+        });
+        return affectedRows; 
     } catch (error) {
-        throw new Error("Error updating user data: " + error.message);
+        throw new Error("Erro ao atualizar dados do funcionário: " + error.message);
     }
 }
 
-async function deleteEmployee(db, employeeId) {
+async function deleteEmployee(employeeId) {
     try {
-        const employeeData = await db.execute('DELETE FROM employees WHERE id = ?', [employeeId]);
-        return employeeData[0].affectedRows; // Retorna o número de linhas afetadas pela exclusão
+        const affectedRows = await Employee.destroy({
+            where: { id: employeeId }
+        });
+        return affectedRows; 
     } catch (error) {
         throw new Error("Erro ao excluir funcionário: " + error.message);
     }
@@ -56,4 +55,4 @@ module.exports = {
     registerEmployee,
     updateEmployee,
     deleteEmployee,
-}
+};
