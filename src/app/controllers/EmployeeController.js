@@ -1,4 +1,4 @@
-const employeeService = require("../services/EmployeeService")
+import { employeeService } from"../services/EmployeeService.js";
 
 class EmployeeController {
     async updateProfile(req, res, next) {
@@ -15,6 +15,4 @@ class EmployeeController {
     }
 }
 
-const employeeController = new EmployeeController()
-
-module.exports = employeeController
+export const employeeController = new EmployeeController()

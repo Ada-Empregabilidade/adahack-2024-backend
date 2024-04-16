@@ -2,7 +2,7 @@ import express from "express";
 import ManagerController from "../controllers/manager.controller.js";
 // import findUserById from '../controllers/manager.controller.js';
 import Admin from "../controllers/admin.controller.js";
-import  employeeController from '../controllers/EmployeeController.js';
+import  { employeeController } from '../controllers/EmployeeController.js';
 
 const router = express.Router();
 

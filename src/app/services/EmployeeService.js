@@ -1,4 +1,4 @@
-const employeeRepository = require("../../infra/db/sequelize/repositories/EmployeeRepository");
+import { employeeRepository } from "../../infra/db/sequelize/repositories/EmployeeRepository.js";
 
 class EmployeeService {
     async execute(data) {
@@ -8,6 +8,4 @@ class EmployeeService {
     }
 }
 
-const employeeService = new EmployeeService()
-
-module.exports = employeeService
+export const employeeService = new EmployeeService()

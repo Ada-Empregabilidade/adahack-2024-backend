@@ -1,4 +1,4 @@
-const User = require("../models/User");
+import { User } from"../models/User.js";
 
 class EmployeeRepository {
     async registrationUpdate(data) {
@@ -21,6 +21,4 @@ class EmployeeRepository {
     }
 }
 
-const employeeRepository = new EmployeeRepository()
-
-module.exports = employeeRepository
+export const employeeRepository = new EmployeeRepository()
