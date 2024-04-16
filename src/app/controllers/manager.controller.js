@@ -1,7 +1,4 @@
-// import models from '../../infra/db/sequelize/models/index.js';
 import { User } from "../../infra/db/sequelize/models/index.js";
-// import db from "../../infra/db/sequelize/models";
-import dataMock from "../repositories/mocks.js";
 
 class ManagerController {
   static async listAllEmployees(req, res) {
@@ -57,12 +54,8 @@ class ManagerController {
     const id = req.params.id;
 
     try {
-      // usar dados do banco - descomentar linha abaixo
-      // const userData = await dataBase.User.findByPk(id);
-      //ou
-      //usar dados mocados
-      const userData = dataMock.find((user) => user.id === id);
-
+      const userData = await User.findByPk(id);
+     
       if (userData) {
         res.send(userData);
       } else {
