@@ -69,10 +69,10 @@ router.delete('/api/funcionarios/:id', async (req, res) => {
     }
 });
 
-router.get('/api/vagas', jobControllers.getAll);
-router.get('/api/vagas/:id', jobControllers.getOne);
-router.post('/api/cadastro/vagas', jobControllers.create);
-router.put('/api/vagas/:id', jobControllers.update);
-router.delete('/api/vagas/:id', jobControllers.deleteOne);
+router.post('/api/jobs', jobControllers.create);
+router.get('/api/jobs', jobControllers.getAll);
+router.put('/api/jobs/:id', jobControllers.update);
+router.get('/api/jobs/:id', jobControllers.getOne);
+router.delete('/api/jobs/:id', jobControllers.deleteOne);
 
 module.exports = router;
