@@ -1,0 +1,6 @@
+{
+  "devDependencies": {
+    "mysql2": "^3.9.4",
+    "sequelize": "^6.37.3"
+  }
+}
