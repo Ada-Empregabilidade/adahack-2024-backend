@@ -1,4 +1,8 @@
-module.exports = (sequelize,DataTypes,Job,Candidate) => {
+const sequelize = require("../../config/db/db.connect");
+const {DataTypes} = require("sequelize");
+const Job = require("./job");
+const Candidate = require("./candidate");
+
     const Application = sequelize.define('Application',{
         id : {
             type : DataTypes.INTEGER,
@@ -26,5 +30,5 @@ module.exports = (sequelize,DataTypes,Job,Candidate) => {
         
     },{tableName : 'applications',timestamps : false});
 
-    return Application
-}
+module.exports = Application;
+
