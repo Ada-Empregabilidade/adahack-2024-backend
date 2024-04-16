@@ -6,7 +6,7 @@ const options = {
     description:
       "API para gerenciamento de funcionários e métricas de inclusão e diversidade",
   },
-  host: "localhost:3000",
+  host: "localhost:3000/api",
 };
 
 const outputFile = "./swagger.json";

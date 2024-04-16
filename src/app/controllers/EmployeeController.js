@@ -1,4 +1,4 @@
-import { employeeService } from"../services/EmployeeService.js";
+import { employeeService } from "../services/EmployeeService.js";
 
 class EmployeeController {
     async updateProfile(req, res, next) {
@@ -8,10 +8,9 @@ class EmployeeController {
             await employeeService.execute(data)
             res.status(201)
             next()
-        } catch(err) {
+        } catch (err) {
             next(err)
         }
-        
     }
 }
 
