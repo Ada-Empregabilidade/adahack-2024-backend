@@ -60,7 +60,7 @@ describe('Admin > create Manager', () => {
 
         User.findOne = jest
             .fn()
-            .mockResolvedValue({ email: 'existing@mail.com' }); // Mock User.findOne para retornar um usuário existente
+            .mockResolvedValue({ email: 'existing@mail.com' });
 
         const res = mockResponse();
         await Admin.create(req, res);
@@ -75,12 +75,18 @@ describe('Admin > create Manager', () => {
         req.body.email = 'test@mail.com';
 
         User.findOne = jest.fn().mockResolvedValue(null);
-        User.create = jest.fn().mockRejectedValue(new Error('Database error')); // Mock User.create para lançar um erro
+        User.create = jest
+            .fn()
+            .mockRejectedValue(
+                new Error('Some error occurred while creating resource.'),
+            );
 
         const res = mockResponse();
         await Admin.create(req, res);
 
         expect(res.status).toHaveBeenCalledWith(500);
-        expect(res.json).toHaveBeenCalledWith({ message: 'Database error' });
+        expect(res.json).toHaveBeenCalledWith({
+            message: 'Some error occurred while creating resource.',
+        });
     });
 });
