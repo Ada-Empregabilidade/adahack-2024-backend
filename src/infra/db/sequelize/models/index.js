@@ -1,20 +1,22 @@
-const dbConfig = require("../db.config.js");
-const { Sequelize, DataTypes } = require("sequelize");
+import dbConfig from '../db.config.js';
+import { DataTypes, Sequelize } from 'sequelize';
 
-const sequelize = new Sequelize(
-  dbConfig.DB,
-  dbConfig.USER,
-  dbConfig.PASSWORD,
-  {
+const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
     host: dbConfig.HOST,
     dialect: dbConfig.dialect,
-  }
-);
+});
 
-const User = require('./user.model.js')(sequelize, DataTypes);
+sequelize
+    .sync()
+    .then(() => console.log('Connection has been established successfully.'))
+    .catch(err =>
+        console.error('Unable to connect to the database:', err.message),
+    );
 
-module.exports = {
-  sequelize,
-  User
+import UserModel from './user.model.js';
+const User = UserModel(sequelize, DataTypes);
+
+export {
+    sequelize,
+    User,
 };
-
