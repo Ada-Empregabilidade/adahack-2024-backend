@@ -1,11 +1,13 @@
-const db = require('../../infra/db/sequelize/database.js');
-const User = require('../../infra/db/sequelize/models/User.js');
+import { User } from '../../infra/db/sequelize/models/index.js';
 
-class admin {
+class Admin {
     static create = async (req, res) => {
         const { email } = req.body;
-        const data = { email };
+        const data = { email, user_type: 'manager' };
 
+        if (!email || req.body == undefined) {
+            return res.status(400).json({ message: 'Invalid e-mail!' });
+        }
         // Email unique validation
         const emailValidation = await User.findOne({ where: { email: email } });
         if (emailValidation) {
@@ -15,7 +17,7 @@ class admin {
         }
 
         await User.create(data, {
-            fields: ['email'],
+            fields: ['email', 'user_type'],
         })
             .then(data => {
                 res.status(201).json({ message: 'User created!', id: data.id });
@@ -30,4 +32,4 @@ class admin {
     };
 }
 
-module.exports = admin;
+export default Admin;
