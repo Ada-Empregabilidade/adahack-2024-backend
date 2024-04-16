@@ -10,7 +10,10 @@
   "directories": {
     "test": "tests"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "mysql2": "^3.9.4",
+    "sequelize": "^6.37.3"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
