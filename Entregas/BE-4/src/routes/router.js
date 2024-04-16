@@ -1,12 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
-const db = require('../db/db.sync')
-const service = require('../services/services')
-
-//router.get('/', (_, res) => {
-//  return res.status(200).json({ message: 'Tudo ok' });
-// })
+const db = require('../db/db.sync');
+const service = require('../services/services');
+const jobControllers = require('../controllers/jobControllers')
 
 router.get('/api/cadastro/funcionarios', async (req, res) => {
     try {
@@ -33,7 +30,6 @@ router.get('/api/cadastro/funcionarios/:id', async (req, res) => {
         res.status(500).json({ error: "Erro interno de servidor" });
     }
 });
-
 
 router.post('/api/cadastro/funcionarios', async (req, res) => {
     try {
@@ -73,5 +69,10 @@ router.delete('/api/funcionarios/:id', async (req, res) => {
     }
 });
 
+router.get('/api/vagas', jobControllers.getAll);
+router.get('/api/vagas/:id', jobControllers.getOne);
+router.post('/api/cadastro/vagas', jobControllers.create);
+router.put('/api/vagas/:id', jobControllers.update);
+router.delete('/api/vagas/:id', jobControllers.deleteOne);
 
 module.exports = router;
