@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+
 const db = require('../db/db.sync')
 const service = require('../services/services')
 
