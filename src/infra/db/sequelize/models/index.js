@@ -1,10 +1,19 @@
-import dbConfig from '../db.config.js';
+import * as dotenv from 'dotenv';
 import { DataTypes, Sequelize } from 'sequelize';
 
+dotenv.config();
+const dbConfig = {
+    DB : process.env.DB,
+    USER : process.env.USER,
+    PASSWORD: process.env.PASSWORD,
+    HOST: process.env.HOST,
+    dialect: process.env.dialect
+}
 const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
     host: dbConfig.HOST,
     dialect: dbConfig.dialect,
 });
+
 
 sequelize
     .sync()
