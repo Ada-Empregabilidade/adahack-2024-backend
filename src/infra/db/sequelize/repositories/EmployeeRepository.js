@@ -1,8 +1,8 @@
-import { User } from"../models/User.js";
+import UserModel from"../models/user.model.js";
 
 class EmployeeRepository {
     async registrationUpdate(data) {
-        await User.update(
+        await UserModel.update(
             {
                 education_level: data.education_level,
                 gender: data.gender,
