@@ -9,7 +9,7 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
 
 sequelize
     .sync()
-    .then(() => console.log('Connection has been established successfully.'))
+    .then(/*console.log('Connection has been established successfully.')*/)
     .catch(err =>
         console.error('Unable to connect to the database:', err.message),
     );
