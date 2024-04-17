@@ -4,21 +4,25 @@ const Candidate = require('../../config/db/models/candidate');
 async function updateCandidate(candidateId, candidateData) {
     try {
         const affectedRows = await Candidate.update(candidateData, {
+
             where: { id: candidateId }
         });
         return affectedRows; 
     } catch (error) {
         throw new Error("Erro ao atualizar dados do candidatos: " + error.message);
     }
+
 }
 
 async function deleteCandidate(candidateId) {
     try {
         const affectedRows = await Candidate.destroy({
+
             where: { id: candidateId }
         });
         return affectedRows; 
     } catch (error) {
+
         throw new Error("Erro ao excluir candidatos: " + error.message);
     }
 }
@@ -31,11 +35,12 @@ async function getAllCandidates() {
         throw new Error("Erro ao obter candidatos do banco de dados: " + error.message);
     }
 }
-
 module.exports = {
 
     updateCandidate,
+
     deleteCandidate,
     getAllCandidates,
+
 
 }
