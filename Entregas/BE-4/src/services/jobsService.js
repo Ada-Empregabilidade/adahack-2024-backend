@@ -9,6 +9,17 @@ async function getAllJobs() {
     }
 }
 
+
+async function getJobsById(jobsId) {
+    try {
+        const jobs = await Jobs.findByPk(jobsId);
+        return jobs || null;
+    } catch (error) {
+        throw new Error("Erro ao obter vagas por ID do banco de dados: " + error.message);
+    }
+}
+
 module.exports = {
-    getAllJobs
+    getAllJobs,
+    getJobsById
 };
