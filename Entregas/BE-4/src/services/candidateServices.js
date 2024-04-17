@@ -5,11 +5,13 @@ async function updateCandidate(candidateId, candidateData) {
     try {
         const affectedRows = await Candidate.update(candidateData, {
 
-        throw new Error("Erro ao excluir candidato: " + error.message);
-
+            where: { id: candidateId }
+        });
+        return affectedRows; 
     } catch (error) {
+        throw new Error("Erro ao atualizar dados do candidatos: " + error.message);
+    }
 
-        throw new Error("Erro ao atualizar dados do candidato: " + error.message);
 }
 
 async function deleteCandidate(candidateId) {
@@ -21,11 +23,24 @@ async function deleteCandidate(candidateId) {
         return affectedRows; 
     } catch (error) {
 
-        throw new Error("Erro ao deletar dados do candidato: " + error.message);
+        throw new Error("Erro ao excluir candidatos: " + error.message);
+    }
+}
 
+async function getAllCandidates() {
+    try {
+        const candidate = await Candidate.findAll();
+        return candidate;
+    } catch (error) {
+        throw new Error("Erro ao obter candidatos do banco de dados: " + error.message);
+    }
+}
 module.exports = {
 
     updateCandidate,
-    deleteCandidate
+
+    deleteCandidate,
+    getAllCandidates,
+
 
 }
