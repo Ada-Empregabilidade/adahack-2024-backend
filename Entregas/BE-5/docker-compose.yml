@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  postgresql:
+    image: postgres
+    container_name: postgresql
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=database
+    ports:
+      - "5432:5432"
+    volumes:
+      - database:/var/lib/postgresql/data
+
+volumes:
+  database:
+    driver: local
