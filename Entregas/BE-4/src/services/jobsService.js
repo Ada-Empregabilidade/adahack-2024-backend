@@ -18,6 +18,7 @@ async function getJobsById(jobsId) {
     }
 }
 
+
 async function registerJobs(jobsData) {
     try {
         const job = await Jobs.create(jobsData);
@@ -31,4 +32,5 @@ module.exports = {
     getAllJobs,
     getJobsById,
     registerJobs
+
 };
