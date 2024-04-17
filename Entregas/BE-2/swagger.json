@@ -1,0 +1,1127 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Ada Hack - Corp Solutions (empresa fictícia)",
+        "description": "Projeto desenvolvido para o Hackathon [Ada](https://ada.tech/), com inicio em 09/04/2024 e término com a banca avaliadora em 18/04/2024. O objetivo principal deste Hackathon é criar estratégias e desenvolver soluções inovadoras que ajudem a Corp Solutions (empresa imaginária) a aumentar a diversidade e a inclusão em sua equipe. Os participantes deverão criar soluções que promovam uma cultura organizacional mais diversificada e inclusiva, utilizando tecnologia e criatividade para enfrentar esse desafio. O hackathon visa encontrar ideias e projetos que possam ser implementados dentro de ambientes corporativos para impulsionar a diversidade e a inclusão no ambiente de trabalho, contribuindo para o crescimento dessa causa dentro do mercado de trabalho."
+    },
+    "version": "1.0.0",
+    "servers": [
+        {
+            "url": "http://localhost:3000/v1",
+            "description": "MVP do projeto para apresentação no Hackathon"
+        }
+    ],
+    "paths": {
+        "/candidato": {
+            "post": {
+                "summary": "Cadastro de pessoas (candidatos/usuários)",
+                "description": "Esta rota é responsável pelo cadastro de pessoas, que inicialmente são candidatos que vão se cadastrar no sistema enviando alguns dados pessoais, e principalmente os dados relacionados a diversidade, como por exemplo etnia, identidade de gênero, orientação sexual, e se é PcD",
+                "tags": ["Candidato/usuário/funcionário"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Candidato"
+                            },
+                            "examples": {
+                                "candidato": {
+                                    "value": {
+                                        "nome": "Candidato de teste",
+                                        "cpf": "12345678901",
+                                        "email": "teste@teste.com",
+                                        "senha": "1234",
+                                        "data_nascimento": "1990-01-01",
+                                        "etnia": "branca",
+                                        "identidade_genero": "homem cis",
+                                        "orientacao_sexual": "heterossexual",
+                                        "pcd": false
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Candidato"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Erro ao cadastrar o candidato. Verifique"
+                    },
+                    "409": {
+                        "description": "Já existe um candidato com o mesmo CPF ou email"
+                    },
+                    "500": {
+                        "description": "Ocorreu um erro interno no servidor"
+                    }
+                }
+            }
+        },
+
+        "/login": {
+            "post": {
+            "summary": "Login no sistema",
+            "description": "Esta rota é responsável pela autenticação e login do usuário",
+            "tags": ["Candidato/usuário/funcionário"],
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Login"
+                        },
+                        "examples": {
+                            "login": {
+                                "value": {
+                                    "email": "teste@teste.com",
+                                    "senha": "1234"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "OK",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "$ref": "#/components/schemas/Login"
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "Erro ao fazer login. Verifique"
+                },
+                "500": {
+                    "description": "Ocorreu um erro interno no servidor"
+                }
+            }
+        }
+        },
+
+
+        "/whoami": {
+            "get": {
+            "summary": "Dados do usuário logado",
+            "description": "Esta rota fornece ao usuário logado seus dados. ATENÇÃO: é necessário autenticação para acesso a essa rota. Nível de acesso: 0 (este é o acesso básico permitido ao candidato assim que ele se cadastra no sistema, e não possui nenhum nível de acesso as demais funcionalidades restritas do sistema. Para acessar demais funcionalidades, apenas se ele for contratado pela empresa, e receber seu nível de acesso conforme a política da empresa em relação ao cargo que o candidato irá ocupar)",
+            "tags": ["Candidato/usuário/funcionário"],
+            "security": [{"bearerAuth": []}],
+            "responses": {
+                "200": {
+                    "description": "OK",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "$ref": "#/components/schemas/Whoami"
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "Token não informado"
+                },
+                "401": {
+                    "description": "Token inválido"
+                },
+                "500": {
+                    "description": "Ocorreu um erro interno no servidor"
+                }
+            }
+        }
+        },
+
+
+        "/deficiencia_candidato": {
+            "post": {
+            "summary": "Cadastro de deficiência do candidato",
+            "description": "Esta rota é responsável pelo cadastro de deficiências em candidatos PcD",
+            "tags": ["Cadastro de PcD"],
+            "security": [{"bearerAuth": []}],
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/PcD"
+                        },
+                        "examples": {
+                            "deficiencia_candidato": {
+                                "value": {
+                                    "tipo_deficiencia": "física",
+                                    "descricao": "",
+                                    "cid": ""
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "OK",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "$ref": "#/components/schemas/PcD"
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "Erro ao cadastrar deficiência para o candidato"
+                },
+                "404": {
+                    "description": "Candidato não encontrado"
+                },
+                "500": {
+                    "description": "Ocorreu um erro interno no servidor"
+                }
+            }
+        }
+        },
+
+        "/deficiencia_candidato/{id}": {
+            "get": {
+                "summary": "Listagem das deficiências de um candidato",
+                "description": "Esta rota é responsável por listar as deficiências de um candidato",
+                "tags": ["Cadastro de PcD"],
+                "security": [{"bearerAuth": []}],
+                "parameters": [
+                  {  
+                    "name":"id",
+                    "in":"path",
+                    "description":"Informar o id do candidato a ser consultado",
+                    "required":true,
+                    "type":"string"
+                  }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "$ref": "#/components/schemas/DeficienciaCandidato"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Token não informado"
+                    },
+                    "401": {
+                        "description": "Token inválido"
+                    },
+                    "403": {
+                        "description": "Este usuário não tem permissão para acessar essa rota (mínimo nível de acesso 2)"
+                    },
+                    "500": {
+                        "description": "Ocorreu um erro interno no servidor"
+                    }
+                }
+            }
+        },
+
+        "/dashboard": {
+            "get": {
+                "summary": "Filtro de pessoas por etnia, identidade de gênero, e/ou orientação sexual",
+                "description": "Esta rota fornece ao usuário logado com pelo menos nível de acesso 2, a possibilidade de realizar a consulta ao sistema informando os parâmetros que deseja consultar. Os parâmetros possíveis são: etnia (amarela, branca, preta, parda, indígena, prefiro não informar), identidade_genero (mulher cis, homem cis, mulher trans, homem trans, não-binário, neutro, agênero) e orientacao_sexual (heterossexual, homossexual, bissexual, assexual, pansexual, outro). Esses parâmetros podem ser utilizados individualmente, ou em conjunto para realizar as consultas, como por exemplo: todos os registros de pessoas com orientação sexual = homossexual (que vai resultar em uma lista de todos os candidatos que possuem essa orientação sexual, ou então pode também acrescentar o parâmetro de etnia = preta, que nesse caso, vai trazer a lista com todos os homossexuais de etnia preta, podendo ainda acrescentar o parâmetro de identidade de gênero = mulher trans, assim trazendo todos os registros de mulheres trans, homossexuais da etnia preta",
+                "tags": ["Dashboard"],
+                "security": [{"bearerAuth": []}],
+                "parameters":[  
+               {  
+                  "name":"etnia",
+                  "in":"query",
+                  "description":"Informar o tipo de etnia que deseja. ex: [amarela, branca, preta, parda, indígena, prefiro não informar]",
+                  "required":false,
+                  "type":"string"
+               },
+               {  
+                  "name":"identidade_genero",
+                  "in":"query",
+                  "description":"Informe a identidade de gênero que deseja. ex: [mulher cis, homem cis, mulher trans, homem trans, não-binário, neutro, agênero]",
+                  "required":false,
+                  "type":"string"
+               },
+               {  
+                  "name":"orientacao_sexual",
+                  "in":"query",
+                  "description":"Informe a orientação sexual que deseja. ex: [heterossexual, homossexual, bissexual, assexual, pansexual, outro]",
+                  "required":false,
+                  "type":"string"
+               }
+            ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "$ref": "#/components/schemas/Candidato"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Token não informado"
+                    },
+                    "401": {
+                        "description": "Token inválido"
+                    },
+                    "403": {
+                        "description": "Este usuário não tem permissão para acessar essa rota (mínimo nível de acesso 2)"
+                    },
+                    "500": {
+                        "description": "Ocorreu um erro interno no servidor"
+                    }
+                }
+            }
+        },
+
+        "/dashboard/funcionarios": {
+            "get": {
+                "summary": "Filtro de funcionários em atividade por etnia, identidade de gênero, e/ou orientação sexual",
+                "description": "Esta rota fornece ao usuário logado com pelo menos nível de acesso 2, a possibilidade de realizar a consulta ao sistema informando os parâmetros que deseja consultar. Os parâmetros possíveis são: etnia (amarela, branca, preta, parda, indígena, prefiro não informar), identidade_genero (mulher cis, homem cis, mulher trans, homem trans, não-binário, neutro, agênero) e orientacao_sexual (heterossexual, homossexual, bissexual, assexual, pansexual, outro). Esses parâmetros podem ser utilizados individualmente, ou em conjunto para realizar as consultas, como por exemplo: todos os registros de funcionários com orientação sexual = homossexual (que vai resultar em uma lista de todos os funcionários que possuem essa orientação sexual, ou então pode também acrescentar o parâmetro de etnia = preta, que nesse caso, vai trazer a lista com todos os homossexuais de etnia preta, podendo ainda acrescentar o parâmetro de identidade de gênero = mulher trans, assim trazendo todos os registros de mulheres trans, homossexuais da etnia preta",
+                "tags": ["Dashboard"],
+                "security": [{"bearerAuth": []}],
+                "parameters":[  
+               {  
+                  "name":"etnia",
+                  "in":"query",
+                  "description":"Informar o tipo de etnia que deseja. ex: [amarela, branca, preta, parda, indígena, prefiro não informar]",
+                  "required":false,
+                  "type":"string"
+               },
+               {  
+                  "name":"identidade_genero",
+                  "in":"query",
+                  "description":"Informe a identidade de gênero que deseja. ex: [mulher cis, homem cis, mulher trans, homem trans, não-binário, neutro, agênero]",
+                  "required":false,
+                  "type":"string"
+               },
+               {  
+                  "name":"orientacao_sexual",
+                  "in":"query",
+                  "description":"Informe a orientação sexual que deseja. ex: [heterossexual, homossexual, bissexual, assexual, pansexual, outro]",
+                  "required":false,
+                  "type":"string"
+               }
+            ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "$ref": "#/components/schemas/Candidato"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Token não informado"
+                    },
+                    "401": {
+                        "description": "Token inválido"
+                    },
+                    "403": {
+                        "description": "Este usuário não tem permissão para acessar essa rota (mínimo nível de acesso 2)"
+                    },
+                    "500": {
+                        "description": "Ocorreu um erro interno no servidor"
+                    }
+                }
+            }
+        },
+
+
+        "/contratar/{id}": {
+            "put": {
+                "summary": "Contratação de candidatos",
+                "description": "Rota responsável pela contratação de candidatos. Nessa rota o usuário precisa estar logado, e possuir o nível de acesso 4 ou maior, pois trata-se da rota responsável pela contratação de novos funcionários da empresa. Nesta rota ele precisa basicamente informar a data de contração do funcionário, é necessário informar a data da contratação, e o nível de acesso que o usuário contratado vai ter. Como regra de negócio, colocamos que a pessoa que está contratando não pode fornecer um nível de acesso maior ou igual ao que ela já possui (ex: como ela precisa ser ao menos nível 4 para acessar essa rota, ela poderá contratar funcionários com no máximo nível 3). Além disso, é necessário informar como parâmetro na URL o id do candidato a ser contratado.",
+                "tags": ["Funções administrativas"],
+                "security": [{"bearerAuth": []}],
+                "parameters":[  
+               {  
+                  "name":"id",
+                  "in":"path",
+                  "description":"Informar o id do candidato a ser contratado",
+                  "required":true,
+                  "type":"string"
+               }
+            ],
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Contratacao"
+                        },
+                        "examples": {
+                            "contratacao": {
+                                "value": {
+                                    "data_contratacao": "AAAA-MM-DD",
+                                    "nivel_acesso": "1"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "$ref": "#/components/schemas/Contratacao"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Token não informado"
+                    },
+                    "401": {
+                        "description": "Token inválido"
+                    },
+                    "403": {
+                        "description": "Este usuário não tem permissão para acessar essa rota (mínimo nível de acesso 4)"
+                    },
+                    "404": {
+                        "description": "Candidato não encontrado"
+                    },
+                    "500": {
+                        "description": "Ocorreu um erro interno no servidor"
+                    }
+                }
+            }
+        },
+
+        "/desligar/{id}": {
+            "put": {
+                "summary": "Demissão/desligamento de funcionários",
+                "description": "Rota responsável pela demissão/desligamento de funcionários. Nessa rota o usuário precisa estar logado, e possuir o nível de acesso 4 ou maior, pois trata-se da rota responsável pelo desligamento de funcionários da empresa. Nesta rota ele precisa basicamente informar a data do desligamento do funcionário, mas não será possível desligar um funcionário com nível de acesso maior ou igual ao seu (ex: se o seu nível de acesso é 4, você só poderá desligar funcionários com nível de acesso até 3). Além disso, é necessário informar como parâmetro na URL o id do funcionário a ser desligado. Nesta função, o sistema irá retirar o acesso do funcionário a ser desligado, setando seu nível para 0, e a data da contratação para NULL, além disso, a data da última contratação será setada para o valor da data de contratação, assim teremos um registro dos ex funcionários da empresa",
+                "tags": ["Funções administrativas"],
+                "security": [{"bearerAuth": []}],
+                "parameters":[  
+               {  
+                  "name":"id",
+                  "in":"path",
+                  "description":"Informar o id do funcionário a ser desligado",
+                  "required":true,
+                  "type":"string"
+               }
+            ],
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Demissao"
+                        },
+                        "examples": {
+                            "contratacao": {
+                                "value": {
+                                    "data_demissao": "AAAA-MM-DD"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "$ref": "#/components/schemas/Demissao"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Token não informado"
+                    },
+                    "401": {
+                        "description": "Token inválido"
+                    },
+                    "403": {
+                        "description": "Este usuário não tem permissão para acessar essa rota (mínimo nível de acesso 4)"
+                    },
+                    "404": {
+                        "description": "Funcionário não encontrado"
+                    },
+                    "500": {
+                        "description": "Ocorreu um erro interno no servidor"
+                    }
+                }
+            }
+        },
+
+        "/candidato/pcd": {
+            "get": {
+                "summary": "Listagem de pessoas PcD",
+                "description": "Esta rota fornece ao usuário logado com pelo menos nível de acesso 1, a possibilidade de realizar a consulta ao sistema das pessoas PcD cadastradas. A consulta será paginada com 20 registros por requisição, portanto deve-se informar a página que deseja consultar (se não informar, por padrão será a página 1). Além disso, pode-se informar também se você quer consultar apenas os funcionários da empresa, ou apenas os candidatos ainda não admitidos, e caso não informe, o sistema trará tanto os candidatos quanto os funcionários",
+                "tags": ["Dashboard"],
+                "security": [{"bearerAuth": []}],
+                "parameters": [
+                    {
+                        "name":"pagina",
+                        "in":"query",
+                        "description":"Informe a página que deseja consultar (por padrão, será a página 1)",
+                        "required":false,
+                        "type":"string"
+                    },
+                    {
+                        "name":"funcionario",
+                        "in":"query",
+                        "description":"Informe true para vir apenas os funcionários, false para vir apenas os candidatos, ou deixe em branco para vir todos",
+                        "required":false,
+                        "type":"string"
+                    }
+                ],
+
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "$ref": "#/components/schemas/ListagemPcd"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Token não informado"
+                    },
+                    "401": {
+                        "description": "Token inválido"
+                    },
+                    "403": {
+                        "description": "Este usuário não tem permissão para acessar essa rota (mínimo nível de acesso 4)"
+                    },
+                    "500": {
+                        "description": "Ocorreu um erro interno no servidor"
+                    }
+                }
+            }
+        },
+
+        "/lista_pessoas": {
+            "get": {
+                "summary": "Listagem de pessoas cadastradas",
+                "description": "Esta rota fornece ao usuário logado com pelo menos nível de acesso 2, a possibilidade de realizar a consulta ao sistema de todas as pessoas cadastradas. A consulta será paginada com 20 registros por requisição, portanto deve-se informar a página que deseja consultar (se não informar, por padrão será a página 1). Além disso, pode-se informar também se você quer consultar apenas os funcionários da empresa, ou apenas os candidatos ainda não admitidos, e caso não informe, o sistema trará tanto os candidatos quanto os funcionários. OBS: A resposta será em ordem alfabética",
+                "tags": ["Dashboard"],
+                "security": [{"bearerAuth": []}],
+                "parameters": [
+                    {
+                        "name":"pagina",
+                        "in":"query",
+                        "description":"Informe a página que deseja consultar (por padrão, será a página 1)",
+                        "required":false,
+                        "type":"string"
+                    },
+                    {
+                        "name":"funcionario",
+                        "in":"query",
+                        "description":"Informe true para vir apenas os funcionários, false para vir apenas os candidatos, ou deixe em branco para vir todos",
+                        "required":false,
+                        "type":"string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "$ref": "#/components/schemas/ListagemPcd"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Token não informado"
+                    },
+                    "401": {
+                        "description": "Token inválido"
+                    },
+                    "403": {
+                        "description": "Este usuário não tem permissão para acessar essa rota (mínimo nível de acesso 4)"
+                    },
+                    "500": {
+                        "description": "Ocorreu um erro interno no servidor"
+                    }
+                }
+            }
+        },
+
+        "/dashboard/report/{consulta}": {
+            "get": {
+                "summary": "Listagem da diversidade",
+                "description": "Esta rota fornece ao usuário logado com pelo menos nível de acesso 4, a possibilidade de realizar a consulta ao sistema das diversidades das pessoas. Tendo a possibilidade de escolher se quer a consulta apenas dos funcionários em atividade, apenas dos candidatos não contratados ainda, apenas dos candidatos que já foram desligados, ou então de todas as pessoas do banco de dados",
+                "tags": ["Dashboard"],
+                "security": [{"bearerAuth": []}],
+                "parameters": [
+                    {
+                        "name":"consulta",
+                        "in":"path",
+                        "description":"Informe o parâmetro da consulta. Opções: todos, funcionarios, candidatos, desligados",
+                        "required":true,
+                        "type":"string",
+                        "default": "funcionarios"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Diversidade"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Token não informado"
+                    },
+                    "401": {
+                        "description": "Token inválido"
+                    },
+                    "403": {
+                        "description": "Este usuário não tem permissão para acessar essa rota (mínimo nível de acesso 4)"
+                    },
+                    "500": {
+                        "description": "Ocorreu um erro interno no servidor"
+                    }
+                }
+            }
+        },
+
+        "/dashboard/relatorio_pcd/{consulta}": {
+            "get": {
+                "summary": "Ranking dos tipos de deficiência",
+                "description": "Esta rota fornece ao usuário logado com pelo menos nível de acesso 4, a possibilidade de realizar a consulta ao sistema das deficiências das pessoas. Tendo a possibilidade de escolher se quer a consulta apenas dos funcionários em atividade, apenas dos candidatos não contratados ainda, apenas dos candidatos que já foram desligados, ou então de todas as pessoas do banco de dados",
+                "tags": ["Dashboard"],
+                "security": [{"bearerAuth": []}],
+                "parameters": [
+                    {
+                        "name":"consulta",
+                        "in":"path",
+                        "description":"Informe o parâmetro da consulta. Opções: todos, funcionarios, candidatos, desligados",
+                        "required":true,
+                        "type":"string",
+                        "default": "funcionarios"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/RelatorioPcd"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Token não informado"
+                    },
+                    "401": {
+                        "description": "Token inválido"
+                    },
+                    "403": {
+                        "description": "Este usuário não tem permissão para acessar essa rota (mínimo nível de acesso 4)"
+                    },
+                    "500": {
+                        "description": "Ocorreu um erro interno no servidor"
+                    }
+                }
+            }
+        },
+
+        "/dashboard/relatorio_pcd_vs_nao_pcd/{consulta}": {
+            "get": {
+                "summary": "Relação entre tipos de deficiência das pessoas PcD em relação as pessoas não PcD",
+                "description": "Esta rota fornece ao usuário logado com pelo menos nível de acesso 4, a possibilidade de realizar a consulta ao sistema das deficiências das pessoas PcD em relação as pessoas não PcD. Tendo a possibilidade de escolher se quer a consulta apenas dos funcionários em atividade, apenas dos candidatos não contratados ainda, apenas dos candidatos que já foram desligados, ou então de todas as pessoas do banco de dados",
+                "tags": ["Dashboard"],
+                "security": [{"bearerAuth": []}],
+                "parameters": [
+                    {
+                        "name":"consulta",
+                        "in":"path",
+                        "description":"Informe o parâmetro da consulta. Opções: todos, funcionarios, candidatos, desligados",
+                        "required":true,
+                        "type":"string",
+                        "default": "funcionarios"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/RelatorioPcdVsNaoPcd"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Token não informado"
+                    },
+                    "401": {
+                        "description": "Token inválido"
+                    },
+                    "403": {
+                        "description": "Este usuário não tem permissão para acessar essa rota (mínimo nível de acesso 4)"
+                    },
+                    "500": {
+                        "description": "Ocorreu um erro interno no servidor"
+                    }
+                }
+            }
+        },
+
+        "/dashboard/relacao_pcd/{consulta}": {
+            "get": {
+                "summary": "Relação entre pessoas PcD e não PcD",
+                "description": "Esta rota fornece ao usuário logado com pelo menos nível de acesso 4, a possibilidade de realizar a consulta ao sistema das pessoas PcD em relação as pessoas não PcD. Tendo a possibilidade de escolher se quer a consulta apenas dos funcionários em atividade, apenas dos candidatos não contratados ainda, apenas dos candidatos que já foram desligados, ou então de todas as pessoas do banco de dados",
+                "tags": ["Dashboard"],
+                "security": [{"bearerAuth": []}],
+                "parameters": [
+                    {
+                        "name":"consulta",
+                        "in":"path",
+                        "description":"Informe o parâmetro da consulta. Opções: todos, funcionarios, candidatos, desligados",
+                        "required":true,
+                        "type":"string",
+                        "default": "funcionarios"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/RelacaoPcd"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Token não informado"
+                    },
+                    "401": {
+                        "description": "Token inválido"
+                    },
+                    "403": {
+                        "description": "Este usuário não tem permissão para acessar essa rota (mínimo nível de acesso 4)"
+                    },
+                    "500": {
+                        "description": "Ocorreu um erro interno no servidor"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Candidato": {
+                "type": "object",
+                "properties": {
+                    "nome": {
+                        "type": "string"
+                    },
+                    "cpf": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "senha": {
+                        "type": "string"
+                    },
+                    "data_nascimento": {
+                        "type": "string"
+                    },
+                    "etnia": {
+                        "type": "string",
+                        "enum": ["amarela", "branca", "preta", "parda", "indígena", "prefiro não informar"]
+                    },
+                    "identidade_genero": {
+                        "type": "string",
+                        "enum": ["mulher cis", "homem cis", "mulher trans", "homem trans", "não-binário", "neutro", "agênero"]
+                    },
+                    "orientacao_sexual": {
+                        "type": "string",
+                        "enum": ["heterossexual", "homossexual", "bissexual", "assexual", "pansexual", "outro"]
+                    },
+                    "pcd": {
+                        "type": "boolean"
+                    }
+                }
+            },
+            "Login": {
+                "type": "object",
+                "properties": {
+                    "email": {
+                        "type": "string"
+                    },
+                    "senha": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Whoami": {
+                "type": "object",
+                "properties": {
+                    "nome": {
+                        "type": "string"
+                    },
+                    "cpf": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "senha": {
+                        "type": "string"
+                    },
+                    "data_nascimento": {
+                        "type": "string"
+                    },
+                    "etnia": {
+                        "type": "string",
+                        "enum": ["amarela", "branca", "preta", "parda", "indígena", "prefiro não informar"]
+                    },
+                    "identidade_genero": {
+                        "type": "string",
+                        "enum": ["mulher cis", "homem cis", "mulher trans", "homem trans", "não-binário", "neutro", "agênero"]
+                    },
+                    "orientacao_sexual": {
+                        "type": "string",
+                        "enum": ["heterossexual", "homossexual", "bissexual", "assexual", "pansexual", "outro"]
+                    },
+                    "pcd": {
+                        "type": "boolean"
+                    },
+                    "iat": {
+                        "type": "number"
+                    },
+                    "exp": {
+                        "type": "number"
+                    }
+                }
+            },
+
+            "PcD": {
+                "type": "object",
+                "properties": {
+                    "tipo_deficiencia": {
+                        "type": "string",
+                        "enum": ["visual", "auditiva", "mental", "intelectual", "espectro autista", "física"]
+                    },
+                    "descricao": {
+                        "type": "string"
+                    },
+                    "cid": {
+                        "type": "string"
+                    }
+                }
+            },
+
+
+            "Contratacao": {
+                "type": "object",
+                "properties": {
+                    "data_contratacao": {
+                        "type": "string"
+                    },
+                    "nivel_acesso": {
+                        "type": "string"
+                    }
+                }
+            },
+
+            "Demissao": {
+                "type": "object",
+                "properties": {
+                    "data_demissao": {
+                        "type": "string"
+                    }
+                }
+            },
+
+            "DeficienciaCandidato": {
+                "type": "object",
+                "properties": {
+                    "candidato": {
+                        "type": "string"
+                    },
+                    "deficiencias": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/PcD"
+                        }
+                    }
+                }
+            },
+
+            "ListagemPcd": {
+                "type": "object",
+                "properties": {
+                    "pagina": {
+                        "type": "number"
+                    },
+                    "totRegistrosConsulta": {
+                        "type": "number"
+                    },
+                    "tipoConsulta": {
+                        "type": "string"
+                    },
+                    "totRegistrosEnviadosNaPagina": {
+                        "type": "number"
+                    },
+                    "candidatos": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "$ref": "#/components/schemas/Candidato"
+                        }
+                    }
+                }
+            },
+
+
+            "Etnia": {
+                "type": "object",
+                "properties": {
+                    "etnia": {
+                        "type": "string"
+                    },
+                    "quantidade": {
+                        "type": "number"
+                    },
+                    "percentual": {
+                        "type": "string"
+                    }
+                }
+            },
+
+            "IdentidadeGenero": {
+                "type": "object",
+                "properties": {
+                    "identidade_genero": {
+                        "type": "string"
+                    },
+                    "quantidade": {
+                        "type": "number"
+                    },
+                    "percentual": {
+                        "type": "string"
+                    }
+                }
+            },
+
+            "OrientacaoSexual": {
+                "type": "object",
+                "properties": {
+                    "orientacao_sexual": {
+                        "type": "string"
+                    },
+                    "quantidade": {
+                        "type": "number"
+                    },
+                    "percentual": {
+                        "type": "string"
+                    }
+                }
+            },
+
+            "TipoDeficiencia": {
+                "type": "object",
+                "properties": {
+                    "tipo_deficiencia": {
+                        "type": "string"
+                    },
+                    "total_de_pessoas_deficientes": {
+                        "type": "number"
+                    },
+                    "total_de_pessoas_com_essa_deficiencia": {
+                        "type": "number"
+                    },
+                    "percentual_sobre_total": {
+                        "type": "string"
+                    }
+                }
+            },
+
+            "TipoDeficienciaPcdVsNaoPcd": {
+                "type": "object",
+                "properties": {
+                    "tipo_deficiencia": {
+                        "type": "string"
+                    },
+                    "total_de_pessoas": {
+                        "type": "number"
+                    },
+                    "total_de_pessoas_com_essa_deficiencia": {
+                        "type": "number"
+                    },
+                    "percentual_deficiencias_sobre_total": {
+                        "type": "string"
+                    }
+                }
+            },
+
+            "Diversidade": {
+                "type": "object",
+                "properties": {
+                    "totalRegistros": {
+                        "type": "number"
+                    },
+                    "tipoConsulta": {
+                        "type": "string"
+                    },
+                    "resultado": {
+                        "type": "array",
+                        "items": {
+                            "type": "array",
+                            "items": {
+                                "oneOf": [
+                                    {"$ref": "#/components/schemas/Etnia"},
+                                    {"$ref": "#/components/schemas/IdentidadeGenero"},
+                                    {"$ref": "#/components/schemas/OrientacaoSexual"}
+                                ]    
+                            }
+                        }
+                    }
+                }
+            },
+
+            "RelatorioPcd": {
+                "type": "object",
+                "properties": {
+                    "tipoConsulta": {
+                        "type": "string"
+                    },
+                    "resultado": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "$ref": "#/components/schemas/TipoDeficiencia"
+                        }
+                    }
+                }
+            },
+
+            "RelatorioPcdVsNaoPcd": {
+                "type": "object",
+                "properties": {
+                    "tipoConsulta": {
+                        "type": "string"
+                    },
+                    "resultado": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "$ref": "#/components/schemas/TipoDeficienciaPcdVsNaoPcd"
+                        }
+                    }
+                }
+            },
+
+            "Condicao": {
+                "type": "object",
+                "properties": {
+                    "condicao": {
+                        "type": "string"
+                    },
+                    "quantidade": {
+                        "type": "number"
+                    },
+                    "percentual": {
+                        "type": "string"
+                    }
+                }
+            },
+
+            "RelacaoPcd": {
+                "type": "object",
+                "properties": {
+                    "tipoConsulta": {
+                        "type": "string"
+                    },
+                    "resultado": {
+                        "type": "array",
+                        "items": {
+                            "oneOf": [
+                                {"$ref": "#/components/schemas/Condicao"},
+                                {"$ref": "#/components/schemas/Condicao"}
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+
+        
+        
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        }
+    }
+}
