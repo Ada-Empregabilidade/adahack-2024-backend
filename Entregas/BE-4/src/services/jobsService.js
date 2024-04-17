@@ -18,7 +18,6 @@ async function getJobsById(jobsId) {
     }
 }
 
-
 async function registerJobs(jobsData) {
     try {
         const job = await Jobs.create(jobsData);
@@ -28,9 +27,20 @@ async function registerJobs(jobsData) {
     }
 }
 
+async function updateJobs(jobsId, jobsData) {
+    try {
+        const affectedRows = await Jobs.update(jobsData, {
+            where: { id: jobsId }
+        });
+        return affectedRows; 
+    } catch (error) {
+        throw new Error("Erro ao atualizar dados do vagas: " + error.message);
+    }
+}
+
 module.exports = {
     getAllJobs,
     getJobsById,
-    registerJobs
-
+    registerJobs,
+    updateJobs
 };
