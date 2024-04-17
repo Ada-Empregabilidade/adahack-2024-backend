@@ -7,6 +7,7 @@
     "test": "tests"
   },
   "scripts": {
+    "docker" : "docker build -t docker-mysql-db . && docker run -d -p 3307:3307 --name mysql-db docker-mysql-db",
     "test": "jest --coverage",
     "dev": "node --watch app.js"
   },
