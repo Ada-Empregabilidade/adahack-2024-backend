@@ -1,0 +1,50 @@
+{
+  "name": "identity-declaration-api",
+  "version": "1.0.0",
+  "description": "A API do Formulário de Diversidade é responsável por fornecer as perguntas e opções de resposta para os formulários de diversidade de funcionários internos e candidatos externos.",
+  "main": "index.js",
+  "scripts": {
+    "seed": "node src/seed.js",
+    "dev": "nodemon",
+    "start": "ts-node src/app.ts",
+    "test:unit": "jest --verbose ./tests/unit/**/**/*.spec.ts --coverage",
+    "test:integration": "jest --verbose --runInBand ./tests/integrations/**/*.spec.ts --coverage"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@prisma/client": "^5.12.1",
+    "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
+    "date-fns-tz": "^3.0.1",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-validator": "^7.0.1",
+    "helmet": "^7.1.0",
+    "http-status-codes": "^2.3.0",
+    "jsonwebtoken": "^9.0.2",
+    "morgan": "^1.10.0",
+    "winston": "^3.13.0"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^8.4.1",
+    "@types/bcrypt": "^5.0.2",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/helmet": "^4.0.0",
+    "@types/jest": "^29.5.12",
+    "@types/jsonwebtoken": "^9.0.6",
+    "@types/morgan": "^1.9.9",
+    "@types/node": "^20.12.7",
+    "@types/supertest": "^6.0.2",
+    "@types/uuid": "^9.0.8",
+    "jest": "^29.7.0",
+    "nodemon": "^3.1.0",
+    "prisma": "^5.12.1",
+    "supertest": "^6.3.4",
+    "ts-jest": "^29.1.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
+  }
+}

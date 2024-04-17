@@ -1,0 +1,72 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model AgeGroup {
+  id          Int                 @id @default(autoincrement())
+  code        String              @unique
+  description String
+  responses   DiversityResponse[]
+
+  @@map("age_groups")
+}
+
+model Gender {
+  id        Int                 @id @default(autoincrement())
+  code      String              @unique
+  value     String
+  responses DiversityResponse[]
+
+  @@map("genders")
+}
+
+model Ethnicity {
+  id        Int                 @id @default(autoincrement())
+  code      String              @unique
+  value     String
+  responses DiversityResponse[]
+
+  @@map("ethnicities")
+}
+
+model Disability {
+  id        Int                 @id @default(autoincrement())
+  code      String              @unique
+  value     String
+  responses DiversityResponse[]
+
+  @@map("disabilities")
+}
+
+model DiversityResponse {
+  id                 Int        @id @default(autoincrement())
+  ageGroupId         Int
+  ageGroup           AgeGroup   @relation(fields: [ageGroupId], references: [id])
+  genderId           Int
+  gender             Gender     @relation(fields: [genderId], references: [id])
+  ethnicityId        Int
+  ethnicity          Ethnicity  @relation(fields: [ethnicityId], references: [id])
+  lgbtqia            Boolean?
+  parent             Boolean?
+  disabilityId       Int
+  disability         Disability @relation(fields: [disabilityId], references: [id])
+  createdAt          DateTime   @default(now())
+  isInternalResponse Boolean    @default(false)
+
+  @@map("diversity_responses")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+
+  @@map("users")
+}

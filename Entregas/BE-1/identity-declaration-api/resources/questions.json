@@ -1,0 +1,75 @@
+{
+    "questions": [
+      {
+        "id": 1,
+        "question": "Qual é sua faixa etária?",
+        "options": [
+          "Menos de 18 anos",
+          "18-24 anos",
+          "25-34 anos",
+          "35-44 anos",
+          "45-54 anos",
+          "55-64 anos",
+          "65 anos ou mais"
+        ]
+      },
+      {
+        "id": 2,
+        "question": "Qual é a sua identidade de gênero auto declarada?",
+        "options": [
+          "Homem cisgênero",
+          "Mulher cisgênero",
+          "Homem transgênero",
+          "Mulher transgênero",
+          "Não-binário",
+          "Prefiro não dizer",
+          "Outro"
+        ]
+      },
+      {
+        "id": 3,
+        "question": "Qual é a sua identidade étnico/racial auto declarada?",
+        "options": [
+          "Branco - Caucasiano",
+          "Negro - Africano/Afro-americano",
+          "Hispânico ou Latino",
+          "Asiático",
+          "Indígena",
+          "Prefiro não dizer",
+          "Outro"
+        ]
+      },
+      {
+        "id": 4,
+        "question": "Você se identifica como LGBTQIAPN+?",
+        "options": [
+          "Sim",
+          "Não",
+          "Prefiro não dizer"
+        ]
+      },
+      {
+        "id": 5,
+        "question": "Você é pai ou mãe?",
+        "options": [
+          "Sim",
+          "Não",
+          "Prefiro não dizer"
+        ]
+      },
+      {
+        "id": 6,
+        "question": "Você é uma pessoa portadora de deficiência?",
+        "options": [
+          "Deficiência visual",
+          "Deficiência auditiva",
+          "Deficiência motora",
+          "Deficiência intelectual",
+          "Deficiência psicossocial",
+          "Não possuo deficiência",
+          "Prefiro não dizer",
+          "Outra"
+        ]
+      }
+    ]
+  }
