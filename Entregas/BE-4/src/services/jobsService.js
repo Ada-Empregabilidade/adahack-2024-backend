@@ -9,6 +9,7 @@ async function getAllJobs() {
     }
 }
 
+
 async function getJobsById(jobsId) {
     try {
         const jobs = await Jobs.findByPk(jobsId);
