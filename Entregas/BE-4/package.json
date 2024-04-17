@@ -1,0 +1,48 @@
+{
+  "name": "adahack-2024-backend",
+  "version": "1.0.0",
+  "description": "Uma solução abrangente para acompanhar e promover a diversidade no ambiente de trabalho, fornecendo ferramentas para análise de dados demográficos, gerenciamento de vagas de emprego e identificação de lacunas na diversidade dentro da empresa.",
+  "main": "app.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "jest --coverage"
+  },
+  "keywords": [
+    "diversidade",
+    "inclusão",
+    "RH",
+    "Recursos Humanos",
+    "análise de dados",
+    "dados demográficos",
+    "emprego",
+    "vagas",
+    "cadastro de usuários",
+    "login",
+    "candidatos",
+    "funcionários",
+    "métricas",
+    "monitoramento",
+    "ferramentas de RH",
+    "diversidade no local de trabalho",
+    "igualdade de oportunidades",
+    "representatividade",
+    "inclusividade",
+    "gestão de talentos",
+    "ADATech",
+    "Hackathon",
+    "VemSerTech"
+  ],
+  "author": "Squad BE-04",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "jest": "^29.7.0",
+    "morgan": "^1.10.0",
+    "sequelize": "^6.37.3",
+    "swagger-ui-express": "^5.0.0"
+  }
+}
