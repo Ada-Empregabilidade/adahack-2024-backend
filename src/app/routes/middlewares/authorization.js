@@ -22,8 +22,8 @@ class Authorization {
             }
 
             if (
-                endpoint.includes('employee/profile') &&
-                ['manager', 'employee'].includes(userType)
+                endpoint.includes('employee') &&
+                ['admin', 'manager', 'employee'].includes(userType)
             ) {
                 return next();
             }
