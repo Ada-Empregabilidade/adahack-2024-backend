@@ -1,4 +1,4 @@
-import * as dotenv from 'dotenv';
+import * as dotenv from "dotenv";
 
 import authorization from "./app/routes/middlewares/authorization.js";
 import cors from "cors";
@@ -16,6 +16,7 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use("/api/", authorization.authMiddleware, router);
 
 dotenv.config();
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server on-line. Port: ${PORT}.`);
