@@ -9,7 +9,7 @@ const postController = require('../controllers/postController');
 const putController = require('../controllers/putController');
 const deleteController = require('../controllers/deleteController');
 const {userExists, createCandidate, findCandidate,} = require('../services/candidate-services');
-const {getAllEmployees, getEmployeeById, registerEmployee, updateEmployee, deleteEmployee
+const {getAllEmployees, getEmployeeById, registerEmployee, updateEmployee, deleteEmployee, employeeExists
 } = require('../services/EmployeeServices')
 
 //get routers
@@ -30,7 +30,7 @@ routesSetters.setGetRouters(router, '/api/data-analysis/candidates', (req, res) 
 
 routesSetters.setPostRouters(router, '/api/employees', (req, res) => {postController(req, res, registerEmployee)});
 
-// routesSetters.setPostRouters(router, '/api/login/employees', (req, res) => {postController(req, res, )});
+routesSetters.setPostRouters(router, '/api/login/employees', (req, res) => {postController(req, res, employeeExists)});
 // routesSetters.setPostRouters(router, '/api/login/candidates', (req, res) => {postController(req, res, )});
 // routesSetters.setPostRouters(router, '/api/jobs', (req, res) => {postController(req, res, )});
 

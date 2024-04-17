@@ -5,7 +5,8 @@ const mysql = require("mysql2/promise");
 const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
     host: dbConfig.HOST,
     dialect: "mysql",
-  });
+    port: dbConfig.DB_PORT
+});
 
 mysql.createConnection({
     user: dbConfig.USER,

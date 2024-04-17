@@ -7,17 +7,15 @@ const JobModel = require("./models/job");
 const ApplicationModel = require("./models/application");
 const AddressModel = require("./models/address");
 
-const dbSync = async () => {
+const dbSync = async () => {(async () => {
     // await UserModel.sync();
-
     await CandidateModel.sync();
     await EmployeeModel.sync();
     await HumanResourceModel.sync();
     await JobModel.sync();
     await ApplicationModel.sync();
     await AddressModel.sync();
-
+})()
 };
 
 module.exports = dbSync;
-
