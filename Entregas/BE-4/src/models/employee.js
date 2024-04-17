@@ -1,6 +1,5 @@
 const sequelize = require("../../config/db/db.connect");
 const {DataTypes} = require("sequelize");
-const User = require("./user");
 
 const Employee = sequelize.define('Employee',{
     id : {
@@ -11,20 +10,48 @@ const Employee = sequelize.define('Employee',{
         allowNull : false
     },
 
-    user_id : {
-        type : DataTypes.INTEGER,
-        references : {
-            model : User,
-            key: 'id'
-        }
+    name: {
+        type: DataTypes.STRING,
+        allowNull: false,
     },
-
+  
+    email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+  
+    phone: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+  
+    password: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+  
     position : {
         type: DataTypes.STRING
     },
 
     department : {
         type: DataTypes.STRING
+    },
+
+    gender : {
+        type: DataTypes.STRING
+    },
+  
+    sexual_orientation : {
+        type: DataTypes.STRING
+    },
+  
+    ethnicity : {
+        type: DataTypes.STRING
+    },
+  
+    pwd : {
+        type: DataTypes.BOOLEAN
     },
 
     employee_registration : {

@@ -7,7 +7,7 @@ const ApplicationModel = require("../../src/models/application");
 const AddressModel = require("../../src/models/address");
 
 (async () => {
-    await UserModel.sync();
+    // await UserModel.sync();
     await CandidateModel.sync();
     await EmployeeModel.sync();
     await HumanResourceModel.sync();

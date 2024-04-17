@@ -2,8 +2,7 @@
 const sequelize = require("../../config/db/db.connect");
 const {DataTypes} = require("sequelize");
 
-const User = sequelize.define(
-  "User",
+const User = sequelize.define("User",
   {
     id: {
       type: DataTypes.INTEGER,
@@ -32,22 +31,6 @@ const User = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-
-    gender : {
-      type: DataTypes.STRING
-  },
-
-  sexual_orientation : {
-      type: DataTypes.STRING
-  },
-
-  ethnicity : {
-      type: DataTypes.STRING
-  },
-
-  pwd : {
-      type: DataTypes.BOOLEAN
-  }
 
   },
   { tableName: "users", timestamps: false }

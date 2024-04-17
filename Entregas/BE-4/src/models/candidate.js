@@ -1,6 +1,5 @@
 const sequelize = require("../../config/db/db.connect");
 const {DataTypes} = require("sequelize");
-const User = require("./user");
 
 const Candidate = sequelize.define('Candidate',{
     id : {
@@ -11,12 +10,24 @@ const Candidate = sequelize.define('Candidate',{
         allowNull : false
     },
     
-    user_id : {
-        type : DataTypes.INTEGER,
-        references : {
-            model : User,
-            key: 'id'
-        }
+    name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+  
+    email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+  
+    phone: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+  
+    password: {
+        type: DataTypes.STRING,
+        allowNull: false,
     },
 
     objective : {
@@ -26,6 +37,22 @@ const Candidate = sequelize.define('Candidate',{
     summary : {
         type: DataTypes.STRING
     },
+
+    gender : {
+        type: DataTypes.STRING
+    },
+  
+    sexual_orientation : {
+        type: DataTypes.STRING
+    },
+  
+    ethnicity : {
+        type: DataTypes.STRING
+    },
+  
+    pwd : {
+        type: DataTypes.BOOLEAN
+    }  
 
 },{tableName : 'candidates',timestamps : false});
 

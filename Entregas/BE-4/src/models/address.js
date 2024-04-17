@@ -1,6 +1,6 @@
 const sequelize = require("../../config/db/db.connect");
 const {DataTypes} = require("sequelize");
-const User = require("./user");
+const Candidate = require("./candidate");
 
 const Address = sequelize.define('Address', {
     id: {
@@ -8,11 +8,11 @@ const Address = sequelize.define('Address', {
         primaryKey: true,
         autoIncrement: true,
     },
-    user_id: {
+    candidate_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references : {
-            model : User,
+            model : Candidate,
             key: 'id'
             }
     },
