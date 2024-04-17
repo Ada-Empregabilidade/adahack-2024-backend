@@ -23,7 +23,7 @@ class Admin {
                 res.status(201).json({ message: 'User created!', id: data.id });
             })
             .catch(err => {
-                res.status(500).send({
+                res.status(500).json({
                     message:
                         err.message ||
                         'Some error occurred while creating resource.',
