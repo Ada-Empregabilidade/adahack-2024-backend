@@ -4,7 +4,7 @@ import { DataTypes, Sequelize } from "sequelize";
 dotenv.config();
 const dbConfig = {
   DB: process.env.DATABASE,
-  USER: process.env.USERNAME,
+  USER: process.env.DB_USER,
   PASSWORD: process.env.PASSWORD,
   HOST: process.env.HOST,
   dialect: process.env.dialect,
