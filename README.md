@@ -115,10 +115,8 @@
 
 ## Autores
 
-- [@BrunoZarth](https://github.com/BrunoZarth)
 - [@djairdj](https://github.com/djairdj)
 - [@dev-gsilv](https://github.com/dev-gsilv)
 - [@heloeng](https://github.com/heloeng)
 - [@marcellaamazonas](https://github.com/marcellaamazonas)
 - [@Mariano-JR](https://github.com/Mariano-JR)
-- [@PatrickVilhena](https://github.com/PatrickVilhena)
