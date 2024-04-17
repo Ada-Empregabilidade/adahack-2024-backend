@@ -1,7 +1,7 @@
-const sequelize = require("../../config/db/db.connect");
+const sequelize = require("../db.connect");
 const {DataTypes} = require("sequelize");
 
-const Candidate = sequelize.define('Candidate',{
+const Employee = sequelize.define('Employee',{
     id : {
         type : DataTypes.INTEGER,
         primaryKey : true,
@@ -9,7 +9,7 @@ const Candidate = sequelize.define('Candidate',{
         autoIncrement : true,
         allowNull : false
     },
-    
+
     name: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -29,12 +29,12 @@ const Candidate = sequelize.define('Candidate',{
         type: DataTypes.STRING,
         allowNull: false,
     },
-
-    objective : {
+  
+    position : {
         type: DataTypes.STRING
     },
 
-    summary : {
+    department : {
         type: DataTypes.STRING
     },
 
@@ -52,8 +52,12 @@ const Candidate = sequelize.define('Candidate',{
   
     pwd : {
         type: DataTypes.BOOLEAN
-    }  
+    },
 
-},{tableName : 'candidates',timestamps : false});
+    employee_registration : {
+        type : DataTypes.DATE
+    }, 
 
-module.exports = Candidate;
+},{tableName : 'employees',timestamps : false});
+
+module.exports = Employee;
