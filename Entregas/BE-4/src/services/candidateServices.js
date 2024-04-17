@@ -41,11 +41,33 @@ async function getCandidateById(candidateId) {
     }
 }
 
+const registerCandidate = async (candidateData) => {
+    try {
+        const candidate = await Candidate.create(candidateData)
+        return candidate
+    } catch (error) {
+        throw new Error("Erro ao cadastrar o usuário" + error.message)
+    }
+}
+
+const candidateExists = async (email, password) => {
+    try {
+        const candidate = await candidate.findOne({ where: { email, password } });
+        if (!candidate) {
+            return false
+        }
+        return true
+    } catch (error) {
+        throw new Error("Erro interno do servidor" + error.message)
+    }
+}
+
 module.exports = {
 
     updateCandidate,
     deleteCandidate,
     getAllCandidates,
     getCandidateById,
-
+    registerCandidate,
+    candidateExists
 }
