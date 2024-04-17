@@ -1,5 +1,5 @@
 const { where } = require('sequelize');
-const { Candidate } = require('../db/db.sync')
+const Candidate = require('../../config/db/models/candidate');
 
 const userExists = async (email) => {
     try {

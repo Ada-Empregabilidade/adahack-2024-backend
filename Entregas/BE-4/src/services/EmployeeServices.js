@@ -1,4 +1,4 @@
-const { Employee } = require('../../src/db/models'); // Colocar a rota correta quando for definida!
+const Employee = require('../../config/db/models/employee'); 
 
 async function getAllEmployees() {
     try {

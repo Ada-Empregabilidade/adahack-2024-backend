@@ -1,3 +1,5 @@
-const app = require('./src/server')
+const dbInitiate = require('./config/db/dbInitiate');
+const app = require('./src/server');
 
-app
+dbInitiate();
+app;
