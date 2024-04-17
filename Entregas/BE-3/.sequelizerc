@@ -1,0 +1,6 @@
+import { resolve } from 'path';
+
+export default {
+  'config': resolve('src', 'infra', 'db', 'sequelize', 'config.js'),
+  'migrations-path': resolve('src', 'infra', 'db', 'sequelize', 'migrations')
+}
