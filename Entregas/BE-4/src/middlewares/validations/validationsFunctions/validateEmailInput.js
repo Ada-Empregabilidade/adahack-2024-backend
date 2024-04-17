@@ -3,3 +3,5 @@ function validateEmailInput(email) {
     
     return regex.test(email);
 }
+
+module.exports = validateEmailInput;

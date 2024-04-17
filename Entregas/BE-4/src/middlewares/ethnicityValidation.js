@@ -1,12 +1,12 @@
+const inputHasInArrayList = require('./validations/validationsFunctions/inputHasInArrayList');
+
 const ethnicityValidation = (req,res,next) => {
 
     const listEthnicity = ['branca','preto','parda','indigena','asiatico'];
+    const inputEthnicity = req.body.ethnicity;
 
-    if(!listEthnicity.includes(req.query.ethnicity)){
-        const err = new Error('valor para etinia não permitido');
-        err.status_code = 400;
-        return next(err)
-    }
+    inputHasInArrayList(listEthnicity, inputEthnicity) ? next() : new Error({statusCode: 404, message: 'Etnia inválida'});
+
 }
 
 module.exports = ethnicityValidation;

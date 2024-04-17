@@ -1,6 +1,8 @@
 const { isAStringType,  isAEmptyString, isAFullSpaceString,isAStringGreaterThenTwoCharacters} = require('../../src/middlewares/validations/validationsFunctions/stringValidations/stringValidations')
 const validateEmailInput = require('../../src/middlewares/validations/validationsFunctions/validateEmailInput');
-let validateBooleanInput, validateNumberInput, inputHasInArrayList;
+const validateBooleanInput = require('../../src/middlewares/validations/validationsFunctions/validateBooleanInput');
+const inputHasInArrayListt = require('../../src/middlewares/validations/validationsFunctions/inputHasInArrayList');;
+const validateNumberInput = require('../../src/middlewares/validations/validationsFunctions/validateNumberInput');;
 
         const isAString = 'i am a string';
         const isAStringEmpty = '';
@@ -123,15 +125,15 @@ describe('Test validations to inputHasInArrayList', () => {
     test('Should be true if the input is a valid entry in the array. Example: Receive 5 to verify in array [3, 5, 7], to return true.', () => {
         
 
-        expect(inputHasInArrayList(2, isAArray)).toBe(true)
-        expect(inputHasInArrayList(isANumber, isAArray)).not.toBe(true)
+        expect(inputHasInArrayListt(isAArray, 2)).toBe(true)
+        expect(inputHasInArrayListt(isAArray, isANumber)).not.toBe(true)
 
     });
-    test('Should be false if the function param isnt a number type. Example: Receive "5", to return false.', () => {
+    test('Should be false if the input is a valid entry in the array. Example: Receive 5 to verify in array [2, 3, 4], to return false.', () => {
         
-        expect(inputHasInArrayList(isANumber, isAArray)).toBe(false)
-        expect(inputHasInArrayList(isAStringNumber, isAArray)).toBe(false)
-        expect(inputHasInArrayList(isAStringSymbol, isAArray)).toBe(false)
+        expect(inputHasInArrayListt(isAArray, isANumber)).toBe(false)
+        expect(inputHasInArrayListt(isAArray, isAStringNumber)).toBe(false)
+        expect(inputHasInArrayListt(isAArray, isAStringSymbol)).toBe(false)
   
     }) 
 
