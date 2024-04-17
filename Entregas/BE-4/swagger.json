@@ -12,8 +12,8 @@
   ],
   "tags": [
     {
-      "name": "Cadastro de Funcionários",
-      "description": "Rotas de cadastro de funcionários"
+      "name": "Cadastro de Colaboradores",
+      "description": "Rotas de cadastro de colaboradores"
     },
     {
       "name": "Dados de Diversidade",
@@ -36,12 +36,12 @@
     "/api/employees": {
       "post": {
         "tags": [
-          "Cadastro de Funcionários"
+          "Cadastro de Colaboradores"
         ],
-        "summary": "Cadastrar funcionário",
-        "description": "Cadastra um novo funcionário no sistema",
+        "summary": "Cadastrar colaborador",
+        "description": "Cadastra um novo colaborador no sistema",
         "requestBody": {
-          "description": "Cria um novo funcionário no sistema",
+          "description": "Cria um novo colaborador no sistema",
           "content": {
             "application/json": {
               "schema": {
@@ -53,7 +53,7 @@
         },
         "responses": {
           "201": {
-            "description": "Novo funcionário cadastrado com sucesso.",
+            "description": "Novo colaborador cadastrado com sucesso.",
             "content": {
               "application/json": {
                 "schema": {
@@ -72,10 +72,10 @@
       },
       "get": {
         "tags": [
-          "Cadastro de Funcionários"
+          "Cadastro de Colaboradores"
         ],
-        "summary": "Listar funcionários",
-        "description": "Retorna todos os funcionários cadastrados",
+        "summary": "Listar colaboradores",
+        "description": "Retorna todos os colaboradores cadastrados",
         "responses": {
           "200": {
             "description": "Requisição bem-sucedida",
@@ -184,7 +184,7 @@
     "/api/employees/{id}": {
       "get": {
         "tags": [
-          "Cadastro de Funcionários"
+          "Cadastro de Colaboradores"
         ],
         "summary": "Encontrar usuário pelo id",
         "description": "Retorna um único usuário",
@@ -260,7 +260,7 @@
             "description": "Proibido - falta de permissão"
           },
           "404": {
-            "description": "Funcionário não encontrado"
+            "description": "Colaborador não encontrado"
           },
           "422": {
             "description": "Exceção de Validação"
@@ -284,10 +284,10 @@
       },
       "put": {
         "tags": [
-          "Cadastro de Funcionários"
+          "Cadastro de Colaboradores"
         ],
-        "summary": "Atualizar Funcionário",
-        "description": "Atualiza informações de um funcionário cadastrado no sistema",
+        "summary": "Atualizar Colaborador",
+        "description": "Atualiza informações de um colaborador cadastrado no sistema",
         "parameters": [
           {
             "name": "id",
@@ -300,7 +300,7 @@
           }
         ],
         "requestBody": {
-          "description": "Atualiza informações de um funcionário",
+          "description": "Atualiza informações de um colaborador",
           "content": {
             "application/json": {
               "schema": {
@@ -312,7 +312,7 @@
         },
         "responses": {
           "200": {
-            "description": "Requisição PUT bem-sucedida, funcionário atualizado com sucesso",
+            "description": "Requisição PUT bem-sucedida, colaborador atualizado com sucesso",
             "content": {
               "application/json": {
                 "schema": {
@@ -331,7 +331,7 @@
             "description": "Proibido - falta de permissão"
           },
           "404": {
-            "description": "Funcionário não encontrado"
+            "description": "Colaborador não encontrado"
           },
           "422": {
             "description": "Exceção de Validação"
@@ -355,20 +355,11 @@
       },
       "delete": {
         "tags": [
-          "Cadastro de Funcionários"
+          "Cadastro de Colaboradores"
         ],
-        "summary": "Deletar funcionário",
+        "summary": "Deletar colaborador",
         "description": "Deleta usuário do id especificado no path",
         "parameters": [
-          {
-            "name": "api_key",
-            "in": "header",
-            "description": "",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
           {
             "name": "id",
             "in": "path",
@@ -393,7 +384,7 @@
             "description": "Proibido - falta de permissão"
           },
           "404": {
-            "description": "Funcionário não encontrado"
+            "description": "Colaborador não encontrado"
           },
           "422": {
             "description": "Exceção de Validação"
@@ -421,8 +412,8 @@
         "tags": [
           "Dados de Diversidade"
         ],
-        "summary": "Análise e exibição dos dados de diversidade dos funcionários",
-        "description": "Retorna o cálculo percentual dos dados de diversidade dos funcionários",
+        "summary": "Análise e exibição dos dados de diversidade dos colaboradores",
+        "description": "Retorna o cálculo percentual dos dados de diversidade dos colaboradores",
         "responses": {
           "200": {
             "description": "Requisição bem-sucedida",
@@ -555,8 +546,8 @@
         "tags": [
           "Autenticação"
         ],
-        "summary": "Login de funcionário",
-        "description": "Autentica um funcionário e gera um token de acesso.",
+        "summary": "Login de colaborador",
+        "description": "Autentica um colaborador e gera um token de acesso.",
         "requestBody": {
           "required": true,
           "content": {
