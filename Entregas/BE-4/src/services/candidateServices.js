@@ -50,6 +50,18 @@ const registerCandidate = async (candidateData) => {
     }
 }
 
+const candidateExists = async (email, password) => {
+    try {
+        const candidate = await candidate.findOne({ where: { email, password } });
+        if (!candidate) {
+            return false
+        }
+        return true
+    } catch (error) {
+        throw new Error("Erro interno do servidor" + error.message)
+    }
+}
+
 module.exports = {
 
     updateCandidate,
@@ -57,5 +69,5 @@ module.exports = {
     getAllCandidates,
     getCandidateById,
     registerCandidate,
-
+    candidateExists
 }

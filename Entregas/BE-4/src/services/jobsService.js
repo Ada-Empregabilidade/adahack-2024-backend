@@ -11,8 +11,10 @@ async function getAllJobs() {
 
 async function getJobsById(jobsId) {
     try {
-        const jobs = await Jobs.findByPk(jobsId);
-        return jobs || null;
+
+        const job = await Jobs.findByPk(jobsId);
+        return job || null;
+
     } catch (error) {
         throw new Error("Erro ao obter vagas por ID do banco de dados: " + error.message);
     }
@@ -38,9 +40,23 @@ async function updateJobs(jobsId, jobsData) {
     }
 }
 
+
+async function deleteJobs(jobsId) {
+    try {
+        const affectedRows = await Jobs.destroy({
+            where: { id: jobsId }
+        });
+        return affectedRows; 
+    } catch (error) {
+        throw new Error("Erro ao excluir vagas: " + error.message);
+    }
+}
+
+
 module.exports = {
     getAllJobs,
     getJobsById,
     registerJobs,
-    updateJobs
+    updateJobs,
+    deleteJobs
 };
