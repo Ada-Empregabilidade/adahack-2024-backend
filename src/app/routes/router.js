@@ -36,7 +36,9 @@ router.get("/manager/employee/:id", ManagerController.findUserById);
 //rota do gestor para atualizar funcionário
 router.put("/manager/employee/:id", ManagerController.updateEmployee);
 
+// Indicadores
+router.get('/employee/group/:name', IndicatorController.countByGroup);
 
-router.get('/manager/employee/count/group', IndicatorController.countByGroup);
+router.get('/employee/groups', IndicatorController.getAllGroups);
 
 export default router;
