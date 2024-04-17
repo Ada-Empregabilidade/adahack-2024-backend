@@ -9,7 +9,6 @@ async function getAllJobs() {
     }
 }
 
-
 async function getJobsById(jobsId) {
     try {
         const jobs = await Jobs.findByPk(jobsId);
@@ -19,7 +18,19 @@ async function getJobsById(jobsId) {
     }
 }
 
+
+async function registerJobs(jobsData) {
+    try {
+        const job = await Jobs.create(jobsData);
+        return job;       
+    } catch (error) {
+        throw new Error("Erro ao cadastrar o vagas: " + error.message);
+    }
+}
+
 module.exports = {
     getAllJobs,
-    getJobsById
+    getJobsById,
+    registerJobs
+
 };
