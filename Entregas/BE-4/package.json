@@ -1,4 +1,5 @@
 {
+
   "name": "adahack-2024-backend",
   "version": "1.0.0",
   "description": "Uma solução abrangente para acompanhar e promover a diversidade no ambiente de trabalho, fornecendo ferramentas para análise de dados demográficos, gerenciamento de vagas de emprego e identificação de lacunas na diversidade dentro da empresa.",
@@ -47,4 +48,5 @@
     "sequelize": "^6.37.3",
     "swagger-ui-express": "^5.0.0"
   }
+
 }
