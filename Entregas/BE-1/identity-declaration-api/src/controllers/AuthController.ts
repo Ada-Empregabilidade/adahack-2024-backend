@@ -1,7 +1,14 @@
 import { Request, Response } from "express";
-import { authService } from "../services/AuthService";
+import { IAuthService } from "../contracts/IAuthService";
 
-export class AuthController {
+class AuthController {
+
+    private authService: IAuthService;
+
+    constructor(authService: IAuthService) {
+        this.authService = authService;
+    }
+
     public async login(req: Request, res: Response): Promise<Response> {
         try {
             const { email, password } = req.body;
@@ -10,9 +17,9 @@ export class AuthController {
                 return res.status(400).json({ message: 'Email and password are required.' });
             }
 
-            const { token } = await authService.login(email, password);
+            const { token } = await this.authService.login(email, password);
 
-            return res.json({ token:  token });
+            return res.json({ token: token });
         } catch (error) {
             let errorMessage = 'Internal server error';
             if (error instanceof Error) {
@@ -26,6 +33,4 @@ export class AuthController {
     }
 }
 
-const authController = new AuthController();
-
-export { authController }
+export { AuthController }

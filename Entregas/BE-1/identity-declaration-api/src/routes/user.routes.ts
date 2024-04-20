@@ -1,14 +1,16 @@
 import express from 'express';
-import { userController } from '../controllers/UserController';
+import { UserController } from '../controllers/UserController';
 import { validateUserData } from '../middleware/UserValidationMiddleware';
 import { authMiddleware } from '../middleware/AuthMiddleware';
 
-const userRoutes = express.Router();
+export function userRoutes(router: express.Router, userController: UserController) {
 
-//Get
-userRoutes.get('/users', authMiddleware, userController.findAll);
+    router.get(
+        '/users', authMiddleware, userController.findAll.bind(userController)
+    );
+    router.post(
+        '/users', validateUserData, userController.create.bind(userController)
+    );
 
-//Post
-userRoutes.post('/user', validateUserData, userController.create);
-
-export { userRoutes }
+    return router;
+}

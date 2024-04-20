@@ -1,20 +1,27 @@
 import { Request, Response } from "express";
-import { userService } from "../services/UserService";
+// import { userService } from "../services/UserService";
 import { CreateUserRequest } from "../models/CreateUserRequest";
 import logger from '../utils/logger';
+import { IUserService } from "../contracts/IUserService";
 
 class UserController {
+    private userService: IUserService;
+
+    constructor(userService: IUserService){
+        this.userService = userService;
+    }
+
     async create(req: Request, res: Response) {
         try {
             const { email, password } = req.body;
 
-            const userExist = await userService.findByEmail(email);
+            const userExist = await this.userService.findByEmail(email);
             if (userExist) {
                 return res.status(409).json({ message: 'User already exists!' });
             }
 
             const createUserRequest: CreateUserRequest = { email, password };
-            const newUser = await userService.create(createUserRequest);
+            const newUser = await this.userService.create(createUserRequest);
 
             res.status(201).json(newUser);
         } catch (error) {
@@ -25,7 +32,7 @@ class UserController {
 
     async findAll(req: Request, res: Response) {
         try {
-            const users = await userService.findAll();
+            const users = await this.userService.findAll();
             return res.status(200).send(users)
         } catch (error) {
             logger.error('Error creating user: %s', error);
@@ -34,6 +41,4 @@ class UserController {
     }
 }
 
-const userController = new UserController();
-
-export { userController };
+export { UserController };

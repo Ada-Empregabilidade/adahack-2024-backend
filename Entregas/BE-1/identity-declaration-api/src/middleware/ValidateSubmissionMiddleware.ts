@@ -14,7 +14,7 @@ const fieldEnumMap: Record<string, any> = {
 };
 
 const getEnumValues = (enumType: any): string[] => {
-    return Object.values(enumType);
+    return Object.values(enumType).filter((value): value is string => typeof value === 'string');
 };
 
 const validateField = (fields: SubmissionField[], errors: any[], location: string): void => {
@@ -28,14 +28,17 @@ const validateField = (fields: SubmissionField[], errors: any[], location: strin
             });
         } else {
             const enumType = fieldEnumMap[field.fieldName];
-            if (enumType && !(field.value in enumType)) {
-                const predefinedValues = getEnumValues(enumType).join(', ');
-                errors.push({
-                    value: field.value,
-                    param: `responses.${field.fieldName}`,
-                    msg: `${field.fieldName} must be one of the predefined codes (${predefinedValues}).`,
-                    location
-                });
+            if (enumType) {
+                const validValues = getEnumValues(enumType);
+                if (!validValues.includes(field.value)) {
+                    const predefinedValues = validValues.join(', ');
+                    errors.push({
+                        value: field.value,
+                        param: `responses.${field.fieldName}`,
+                        msg: `${field.fieldName} must be one of the predefined codes (${predefinedValues}).`,
+                        location
+                    });
+                }
             } else if (typeof field.value !== field.type) {
                 errors.push({
                     value: field.value,
@@ -47,6 +50,7 @@ const validateField = (fields: SubmissionField[], errors: any[], location: strin
         }
     });
 };
+
 
 export const validateSubmissionRules = () => {
     return (req: Request, res: Response, next: NextFunction) => {
