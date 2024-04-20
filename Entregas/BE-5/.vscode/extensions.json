@@ -1,0 +1,11 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "cweijan.vscode-database-client2",
+    "ms-vscode.vscode-typescript-next",
+    "ms-azuretools.vscode-docker",
+    "mikestead.dotenv",
+    "esbenp.prettier-vscode",
+    "prisma.prisma"
+  ]
+}
