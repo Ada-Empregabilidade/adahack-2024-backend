@@ -1,11 +1,17 @@
 import express from 'express';
-import { diversityController } from '../controllers/DiversityController';
+import { DiversityController } from '../controllers/DiversityController';
 import { validateSubmission } from '../middleware/ValidateSubmissionMiddleware';
 
-const diversityExternalRoutes = express.Router();
+export function diversityExternalRoutes(router: express.Router, diversityController: DiversityController) {
 
-diversityExternalRoutes.get('/diversity/external/questions', diversityController.getQuestions);
-
-diversityExternalRoutes.post('/diversity/external/submit', validateSubmission, diversityController.submitResponse);
-
-export { diversityExternalRoutes }
+    router.get(
+        '/diversity/external/questions',
+        diversityController.getQuestions.bind(diversityController)
+    );
+    router.post(
+        '/diversity/external/submit',
+        validateSubmission,
+        diversityController.submitResponse.bind(diversityController)
+    )
+    return router;
+}

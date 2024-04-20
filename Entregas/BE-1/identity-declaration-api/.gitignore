@@ -1,0 +1,12 @@
+node_modules
+dist
+built
+*-lock.json
+.env
+.env.test
+desktop.ini
+.vscode
+coverage
+**/node_modules
+**/coverage
+**/dist

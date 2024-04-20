@@ -1,8 +1,12 @@
-import { userRepository } from "../repositories/UserRepository";
 import { CreateUserRequest } from "../models/CreateUserRequest";
 import { UserResponse } from "../models/UserReponse";
+import { IUserService } from "../contracts/IUserService";
+import { IUserRepository } from "../contracts/IUserRepository";
 
-class UserService {
+class UserService implements IUserService {
+
+    constructor(private userRepository: IUserRepository){}
+
     async create(user: CreateUserRequest): Promise<UserResponse> {
         const userReponse = await this.findByEmail(user.email);
 
@@ -10,21 +14,23 @@ class UserService {
             throw new Error('User already exists!')
         }
 
-        const newUser = await userRepository.create(user);
+        const newUser = await this.userRepository.create(user);
         return newUser
     }
 
-    async findByEmail(email: string) {
-        const user = await userRepository.findByEmail(email)
-        return user
+    async findByEmail(email: string): Promise<UserResponse> {
+        const user = await this.userRepository.findByEmail(email)
+        if(!user){
+            throw new Error("User not found");
+        }
+        return user;        
     }
 
     async findAll() {
-        const users = await userRepository.findAll();
+        const users = await this.userRepository.findAll();
         return users
     }
 }
 
-const userService = new UserService();
 
-export { userService }
+export { UserService }
